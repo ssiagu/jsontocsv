@@ -1,0 +1,11 @@
+使用Blob 和URL 来封装和转换
+
+var blob = new Blob([data], { type: 'text/csv' }); //new way  
+var csvUrl = URL.createObjectURL(blob);  
+document.getElementById("mylink").href = csvUrl; 
+
+这里如遇中文问题， 和上面的处理方式是一样的：
+1. 页面的charset 需设置成gb2312 （设成UTF-8 也可以）
+2. 加上 \ufeff BOM 头
+data = "\ufeff"+data;
+var blob = new Blob([data], { type: 'text/csv,charset=UTF-8'});
